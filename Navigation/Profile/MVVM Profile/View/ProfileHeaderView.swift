@@ -28,7 +28,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }()
     let fullNameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.textColor = .black
+        nameLabel.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         nameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         nameLabel.textAlignment = NSTextAlignment.center
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +36,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }()
     let statusLabel: UILabel = {
         let statusLabel = UILabel()
-        statusLabel.textColor = .gray
+        statusLabel.textColor = UIColor.createColor(lightMode: .gray, darkMode: .white)
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
@@ -44,8 +44,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     let statusTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Waiting for status".localized
-        textField.textColor = .black
-        textField.backgroundColor = .white
+        textField.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        textField.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
         textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
