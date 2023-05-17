@@ -51,6 +51,7 @@
 		66E02EA028DB927100ECCD13 /* PhotoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E02E9F28DB927100ECCD13 /* PhotoCoordinator.swift */; };
 		66FFB08628C405DC00019A47 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FFB08528C405DC00019A47 /* User.swift */; };
 		DF0B485B2A14E3AA001FB3D8 /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0B485A2A14E3A9001FB3D8 /* LocalNotificationService.swift */; };
+		DF0B485D2A14E9B5001FB3D8 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0B485C2A14E9B5001FB3D8 /* LocalAuthorizationService.swift */; };
 		DF10B6172A13C77600BD2C30 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10B6162A13C77600BD2C30 /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +115,7 @@
 		66E02E9F28DB927100ECCD13 /* PhotoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCoordinator.swift; sourceTree = "<group>"; };
 		66FFB08528C405DC00019A47 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DF0B485A2A14E3A9001FB3D8 /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
+		DF0B485C2A14E9B5001FB3D8 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		DF10B6162A13C77600BD2C30 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -222,6 +224,7 @@
 				66948D1926CC01820080D3D6 /* Info.plist */,
 				6605AB8B28F4A13800EB89FA /* GoogleService-Info.plist */,
 				DF0B485A2A14E3A9001FB3D8 /* LocalNotificationService.swift */,
+				DF0B485C2A14E9B5001FB3D8 /* LocalAuthorizationService.swift */,
 				66948D2126CCE0580080D3D6 /* FeedViewController.swift */,
 				66948D3426CD14B80080D3D6 /* InfoViewController.swift */,
 				667982F528CFD3D9009F3207 /* CustomButton.swift */,
@@ -389,6 +392,7 @@
 				663965C227E28251001675D8 /* PhotosCollectionViewCell.swift in Sources */,
 				6679830B28D3CF70009F3207 /* TabBarController.swift in Sources */,
 				663965BF27E2813D001675D8 /* PhotosViewController.swift in Sources */,
+				DF0B485D2A14E9B5001FB3D8 /* LocalAuthorizationService.swift in Sources */,
 				66B5B14B29789DD200BE2939 /* MapViewController.swift in Sources */,
 				66103A7829242E6D00D04ECF /* PostModel.xcdatamodeld in Sources */,
 				DF10B6172A13C77600BD2C30 /* UIColorExtension.swift in Sources */,

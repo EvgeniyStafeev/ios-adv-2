@@ -5,11 +5,12 @@
 //  Created by Евгений Стафеев on 15.11.2022.
 //
 
+
 import UIKit
 import FirebaseAuth
 
 extension UIImage {
-
+    
     func alpha(_ value:CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
@@ -42,7 +43,7 @@ class LogInViewController: UIViewController {
         return image
     }()
     let authorizationWindow: UIStackView = {
-       let authWindow = UIStackView()
+        let authWindow = UIStackView()
         authWindow.translatesAutoresizingMaskIntoConstraints = false
         authWindow.layer.borderColor = UIColor.lightGray.cgColor
         authWindow.layer.borderWidth = 0.5
@@ -92,8 +93,28 @@ class LogInViewController: UIViewController {
         return loginButton
     }()
     
+    let faceIdButton: UIButton = {
+        let faceIdButton = UIButton()
+        faceIdButton.translatesAutoresizingMaskIntoConstraints = false
+        faceIdButton.addTarget(self, action: #selector(faceIdButtonTap), for: .touchUpInside)
+        return faceIdButton
+    }()
+    
     var loginDelegate: LoginViewControllerDelegate?
-
+    
+    var localAuthService: LocalAuthorizationService?
+    
+    @objc func faceIdButtonTap() {
+        localAuthService?.authorizeIfPossible() { doneWorking in
+            if doneWorking {
+                self.coordinator.startView()
+            } else {
+                print("LOG IN ERROR")
+            }
+            
+        }
+    }
+    
     func tap() {
         guard let login = self.loginTextField.text, let pass = self.passwordTextField.text, !login.isEmpty, !pass.isEmpty else {
             AlertErrorSample.shared.alert(alertTitle: NSLocalizedString("Fill error", comment: ""), alertMessage: NSLocalizedString("Email and password fields must be filled", comment: ""))
@@ -104,10 +125,10 @@ class LogInViewController: UIViewController {
         } else {
             return
         }
-}
+    }
     
     let loginScrollView: UIScrollView = {
-    let scrollView = UIScrollView()
+        let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         return scrollView
@@ -148,18 +169,18 @@ class LogInViewController: UIViewController {
         view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         
         view.addSubview(loginScrollView)
-
+        
         loginButton.actionHandler = { [weak self] in
             guard let self = self else { return }
             self.tap()
         }
-
+        
         
         NSLayoutConstraint.activate([
-        loginScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-        loginScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-        loginScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        loginScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            loginScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            loginScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loginScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            loginScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -188,11 +209,34 @@ class LogInViewController: UIViewController {
         authorizationWindow.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         
         contentView.addSubview(loginButton)
+        
+        switch localAuthService?.checkBiometryType() {
+        case .face:
+            faceIdButton.setBackgroundImage(UIImage(systemName: "faceid"), for: .normal)
+            buttonSetup()
+        case .touch:
+            faceIdButton.setBackgroundImage(UIImage(systemName: "touchid"), for: .normal)
+            buttonSetup()
+        default:
+            loginButton.topAnchor.constraint(equalTo: authorizationWindow.bottomAnchor, constant: 16).isActive = true
+            loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            loginButton.leadingAnchor.constraint(equalTo: authorizationWindow.leadingAnchor).isActive = true
+            loginButton.trailingAnchor.constraint(equalTo: authorizationWindow.trailingAnchor).isActive = true
+            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        }
+        
+    }
+    func buttonSetup() {
+        contentView.addSubview(faceIdButton)
         loginButton.topAnchor.constraint(equalTo: authorizationWindow.bottomAnchor, constant: 16).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         loginButton.leadingAnchor.constraint(equalTo: authorizationWindow.leadingAnchor).isActive = true
-        loginButton.rightAnchor.constraint(equalTo: authorizationWindow.rightAnchor).isActive = true
+        loginButton.trailingAnchor.constraint(equalTo: faceIdButton.leadingAnchor, constant: -10).isActive = true
         loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-            
-        }
+        faceIdButton.topAnchor.constraint(equalTo: authorizationWindow.bottomAnchor, constant: 16).isActive = true
+        faceIdButton.widthAnchor.constraint(equalToConstant: 55).isActive = true
+        faceIdButton.trailingAnchor.constraint(equalTo: authorizationWindow.trailingAnchor).isActive = true
+        faceIdButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        
     }
+}
