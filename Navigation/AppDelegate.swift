@@ -13,7 +13,7 @@ import FirebaseAuth
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+    let localNotificationService = LocalNotificationsService()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         print(getDocumentsDirectory())
         
+        localNotificationService.registeForLatestUpdatesIfPossible()
         let mainCoordinator: MainCoordinator = MainCoordinatorImp()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
